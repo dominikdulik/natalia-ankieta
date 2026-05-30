@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Natalia Grabowska — Wywiad ekspercki</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: #f5f0eb;
+    color: #2c1a0e;
+    min-height: 100vh;
+  }
+
+  header {
+    background: #2c1a0e;
+    color: #f5f0eb;
+    padding: 48px 24px;
+    text-align: center;
+  }
+
+  header h1 {
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+
+  header p {
+    font-size: 1rem;
+    color: #c8a97e;
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .progress-bar-wrap {
+    background: #1a0f07;
+    height: 4px;
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: #c8a97e;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .block {
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 32px;
+    box-shadow: 0 2px 12px rgba(44,26,14,0.08);
+  }
+
+  .block-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #f5f0eb;
+  }
+
+  .block-number {
+    background: #2c1a0e;
+    color: #c8a97e;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  .block-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #2c1a0e;
+  }
+
+  .block-subtitle {
+    font-size: 0.8rem;
+    color: #8b6f47;
+    margin-top: 2px;
+  }
+
+  .question {
+    margin-bottom: 28px;
+  }
+
+  .question:last-child {
+    margin-bottom: 0;
+  }
+
+  .question label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #2c1a0e;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  .question label span.qnum {
+    color: #c8a97e;
+    margin-right: 6px;
+  }
+
+  .question textarea {
+    width: 100%;
+    border: 1.5px solid #e0d5c8;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-family: 'Georgia', serif;
+    font-size: 0.95rem;
+    color: #2c1a0e;
+    background: #fdfaf7;
+    resize: vertical;
+    min-height: 90px;
+    transition: border-color 0.2s;
+    line-height: 1.6;
+  }
+
+  .question textarea:focus {
+    outline: none;
+    border-color: #8b6f47;
+    background: #fff;
+  }
+
+  .question textarea::placeholder {
+    color: #c4b09a;
+    font-style: italic;
+  }
+
+  .intro-box {
+    background: #2c1a0e;
+    color: #f5f0eb;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+
+  .intro-box h2 {
+    font-size: 1.1rem;
+    color: #c8a97e;
+    margin-bottom: 12px;
+  }
+
+  .intro-box p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #d4c4b0;
+  }
+
+  .intro-box p + p {
+    margin-top: 10px;
+  }
+
+  .name-field {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+    box-shadow: 0 2px 12px rgba(44,26,14,0.08);
+  }
+
+  .name-field label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #2c1a0e;
+    margin-bottom: 8px;
+  }
+
+  .name-field input {
+    width: 100%;
+    border: 1.5px solid #e0d5c8;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    color: #2c1a0e;
+    background: #fdfaf7;
+    transition: border-color 0.2s;
+  }
+
+  .name-field input:focus {
+    outline: none;
+    border-color: #8b6f47;
+    background: #fff;
+  }
+
+  .submit-wrap {
+    text-align: center;
+    margin-top: 16px;
+  }
+
+  button[type="submit"] {
+    background: #2c1a0e;
+    color: #c8a97e;
+    border: none;
+    border-radius: 8px;
+    padding: 16px 48px;
+    font-family: 'Georgia', serif;
+    font-size: 1.05rem;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: background 0.2s, transform 0.1s;
+  }
+
+  button[type="submit"]:hover {
+    background: #4a2f1a;
+    transform: translateY(-1px);
+  }
+
+  button[type="submit"]:active {
+    transform: translateY(0);
+  }
+
+  .submit-note {
+    margin-top: 12px;
+    font-size: 0.82rem;
+    color: #8b6f47;
+  }
+
+  /* Thank you screen */
+  #thank-you {
+    display: none;
+    text-align: center;
+    padding: 80px 24px;
+  }
+
+  #thank-you .icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+
+  #thank-you h2 {
+    font-size: 1.6rem;
+    color: #2c1a0e;
+    margin-bottom: 12px;
+  }
+
+  #thank-you p {
+    color: #8b6f47;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.5rem; }
+    .block { padding: 24px 20px; }
+    main { padding: 24px 16px 60px; }
+    .intro-box { padding: 20px; }
+    .name-field { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Natalia Grabowska</h1>
+  <p>Wywiad ekspercki — budujemy Twoją markę konsultanta kawowego.<br>Odpowiedz szczerze, własnymi słowami. Nie ma złych odpowiedzi.</p>
+</header>
+<div class="progress-bar-wrap"><div class="progress-bar" id="progress"></div></div>
+
+<main>
+
+  <div id="form-wrap">
+
+    <div class="intro-box">
+      <h2>Dlaczego ten wywiad?</h2>
+      <p>Chcemy pomóc Ci zbudować markę eksperta — tak, żebyś przestała być "osobą w tle" i zaczęła być widoczna jako konsultant, którego kawiarnie i importerzy szukają.</p>
+      <p>Odpowiedzi z tego wywiadu posłużą do stworzenia Twojego biznes planu i strategii contentu na pierwsze 90 dni. Zajmie Ci to ok. 20–30 minut. Możesz wracać i uzupełniać.</p>
+    </div>
+
+    <form id="natalia-form" action="https://formspree.io/f/TWOJ_ENDPOINT" method="POST">
+
+      <div class="name-field">
+        <label for="imie">Twoje imię i nazwisko</label>
+        <input type="text" id="imie" name="imie" placeholder="Natalia Grabowska" required>
+      </div>
+
+      <!-- BLOK 1 -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-number">1</div>
+          <div>
+            <div class="block-title">Kim jesteś</div>
+            <div class="block-subtitle">Tożsamość i ekspertyza</div>
+          </div>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">01</span> Jak byś opisała siebie w jednym zdaniu — komuś, kto nic nie wie o kawie?</label>
+          <textarea name="q01" placeholder="Napisz własnymi słowami..."></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">02</span> Ile lat pracujesz w branży i co robiłaś w każdym z tych etapów?</label>
+          <textarea name="q02" placeholder="Np. 2018–2020: barista, 2020–2023: head roaster..."></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">03</span> Co konkretnie robisz w Full Circle Roasters na co dzień?</label>
+          <textarea name="q03" placeholder="Opisz typowy dzień lub tydzień pracy..."></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">04</span> Czym zajmujesz się jako konsultant lub coach poza główną pracą — choćby nieformalnie?</label>
+          <textarea name="q04" placeholder="Czy ktoś już prosi Cię o pomoc prywatnie?"></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">05</span> Jakie certyfikaty, kursy i szkolenia masz za sobą?</label>
+          <textarea name="q05" placeholder="SCA, Q Grader, barista championship, inne..."></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">06</span> W jakich konkursach uczestniczyłaś — jako zawodnik i jako coach?</label>
+          <textarea name="q06" placeholder="Nazwa konkursu, rok, Twoja rola, wynik..."></textarea>
+        </div>
+      </div>
+
+      <!-- BLOK 2 -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-number">2</div>
+          <div>
+            <div class="block-title">Co robisz</div>
+            <div class="block-subtitle">Konkretne umiejętności i usługi</div>
+          </div>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">07</span> Co dokładnie robisz gdy "sprawdzasz jakość" kawiarni? Jak wygląda taka wizyta krok po kroku?</label>
+          <textarea name="q07" placeholder="Od momentu wejścia do kawiarni do finalnego raportu..."></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">08</span> Co robisz gdy "wspierasz nowe miejsce" — od czego zaczynasz, co dostarczasz na końcu?</label>
+          <textarea name="q08" placeholder="Proces, etapy, efekty końcowe..."></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">09</span> Jak wygląda praca z zespołem przed konkursem? Co dajesz zawodnikowi?</label>
+          <textarea name="q09" placeholder="Metodologia, czas, co zmienia się u zawodnika..."></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">10</span> Jakie są 3 największe błędy kawiarni, które widzisz najczęściej?</label>
+          <textarea name="q10" placeholder="1. ...&#10;2. ...&#10;3. ..."></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">11</span> Co importerzy kawy najczęściej od Ciebie potrzebują?</label>
+          <textarea name="q11" placeholder="Czego im brakuje, z czym przychodzą?"></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">12</span> Czy prowadziłaś szkolenia — formalne lub nieformalne? Dla kogo i z czego?</label>
+          <textarea name="q12" placeholder="Temat, grupa, format..."></textarea>
+        </div>
+      </div>
+
+      <!-- BLOK 3 -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-number">3</div>
+          <div>
+            <div class="block-title">Dla kogo</div>
+            <div class="block-subtitle">Rynek i idealny klient</div>
+          </div>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">13</span> Kto był Twoim najlepszym klientem lub współpracownikiem — i dlaczego?</label>
+          <textarea name="q13" placeholder="Nie musisz podawać nazwy — opisz charakter, branżę, sytuację..."></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">14</span> Komu pomagasz najchętniej: właścicielom kawiarni, baristom, importerom?</label>
+          <textarea name="q14" placeholder="Kogo lubisz mieć po drugiej stronie stołu?"></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">15</span> W jakim obszarze geograficznie chcesz działać: Irlandia, Europa, globalnie?</label>
+          <textarea name="q15" placeholder="Gdzie widzisz swój rynek?"></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">16</span> Czy masz już teraz klientów lub zapytania, na które odpowiadasz prywatnie?</label>
+          <textarea name="q16" placeholder="Ile takich zapytań dostajesz miesięcznie?"></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">17</span> Kto do Ciebie dzwoni lub pisze, gdy pojawia się problem z kawą?</label>
+          <textarea name="q17" placeholder="Kim jest ta osoba — właściciel, barista, manager?"></textarea>
+        </div>
+      </div>
+
+      <!-- BLOK 4 -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-number">4</div>
+          <div>
+            <div class="block-title">Co Cię wyróżnia</div>
+            <div class="block-subtitle">Unikalność i punkt widzenia</div>
+          </div>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">18</span> Czego Ty rozumiesz o kawie, czego większość "ekspertów" nie rozumie lub pomija?</label>
+          <textarea name="q18" placeholder="Co widzisz, czego inni nie widzą?"></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">19</span> Co mówią Ci ludzie, gdy pracujesz z nimi po raz pierwszy — co ich zaskakuje?</label>
+          <textarea name="q19" placeholder="Jakie mają reakcje?"></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">20</span> Jaki jest Twój styl pracy z ludźmi — twarda ocena czy coaching i budowanie pewności?</label>
+          <textarea name="q20" placeholder="Jak opisałaby Cię osoba, z którą pracowałaś?"></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">21</span> Czy łączysz wiedzę techniczną (ekstrakcja, palenie) z biznesową (operacje kawiarni)? Jak?</label>
+          <textarea name="q21" placeholder="Przykład sytuacji, gdy to połączenie pomogło..."></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">22</span> Czy masz kontrowersyjny pogląd na dobrą kawę lub dobrą kawiarnię?</label>
+          <textarea name="q22" placeholder="Coś, z czym większość branży by się nie zgodziła..."></textarea>
+        </div>
+      </div>
+
+      <!-- BLOK 5 -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-number">5</div>
+          <div>
+            <div class="block-title">Model biznesowy</div>
+            <div class="block-subtitle">Skąd miałyby płynąć pieniądze</div>
+          </div>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">23</span> Za co byś chciała być płatna w pierwszej kolejności — audyt, szkolenie, coaching, doradztwo?</label>
+          <textarea name="q23" placeholder="Co byś robiła gdybyś jutro zaczęła brać za to pieniądze?"></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">24</span> Wolisz pracować projektowo (jednorazowe zlecenia) czy w modelu retainera (stała współpraca)?</label>
+          <textarea name="q24" placeholder="Co bardziej pasuje do Twojego stylu życia?"></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">25</span> Ile godzin tygodniowo możesz teraz poświęcić na własny biznes obok Full Circle?</label>
+          <textarea name="q25" placeholder="Realistycznie — ile masz przestrzeni?"></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">26</span> Czy Full Circle Roasters wie o Twoich planach? Potencjalny konflikt, czy wręcz wsparcie?</label>
+          <textarea name="q26" placeholder="Jak oceniasz ten aspekt?"></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">27</span> Jakiej stawki godzinowej lub dziennej oczekujesz za swoją pracę?</label>
+          <textarea name="q27" placeholder="Kwota orientacyjna w EUR lub PLN..."></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">28</span> Czy myślisz o produktach cyfrowych — kurs online, e-book, konsultacje zdalne?</label>
+          <textarea name="q28" placeholder="Co brzmi dla Ciebie interesująco?"></textarea>
+        </div>
+      </div>
+
+      <!-- BLOK 6 -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-number">6</div>
+          <div>
+            <div class="block-title">Personal brand i treści</div>
+            <div class="block-subtitle">Co i jak będziesz tworzyć</div>
+          </div>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">29</span> Co Cię najbardziej nakręca w kawie — co byś opowiadała godzinami bez pytania?</label>
+          <textarea name="q29" placeholder="Temat, który Cię wciąga bez ograniczeń..."></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">30</span> Czy jest temat w branży kawowej, który Cię irytuje lub z którym się nie zgadzasz?</label>
+          <textarea name="q30" placeholder="Co Cię denerwuje gdy widzisz w kawiarni lub w branży?"></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">31</span> Czy chciałabyś tworzyć treści po angielsku, po polsku, czy w obu językach?</label>
+          <textarea name="q31" placeholder="Jaki język czujesz jako swój?"></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">32</span> Jakie formaty treści Ci się podobają — video, zdjęcia, tekst, stories? Co sprawia Ci trudność?</label>
+          <textarea name="q32" placeholder="Co robisz chętnie, a co Cię blokuje?"></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">33</span> Kogo w branży kawowej (lub poza nią) obserwujesz i szanujesz — dlaczego?</label>
+          <textarea name="q33" placeholder="Konto/osoba + co Cię w niej przyciąga..."></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">34</span> Jak reagujesz na kamery — możesz mówić do obiektywu czy wolisz pisać?</label>
+          <textarea name="q34" placeholder="Szczerze — jak się czujesz przed kamerą?"></textarea>
+        </div>
+      </div>
+
+      <!-- BLOK 7 -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-number">7</div>
+          <div>
+            <div class="block-title">Bariery i motywacja</div>
+            <div class="block-subtitle">Co Cię zatrzymuje i co napędza</div>
+          </div>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">35</span> Co najbardziej Cię powstrzymuje przed działaniem na własny rachunek już teraz?</label>
+          <textarea name="q35" placeholder="Strach, czas, finanse, coś innego?"></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">36</span> Czego się boisz najbardziej w budowaniu marki osobistej?</label>
+          <textarea name="q36" placeholder="Co jest największą obawą?"></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">37</span> Jak reagujesz na krytykę — opinia internetu Cię blokuje czy motywuje?</label>
+          <textarea name="q37" placeholder="Szczerze — jak na to reagujesz?"></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">38</span> Co by musiało się wydarzyć, żebyś za rok czuła że "to się udało"?</label>
+          <textarea name="q38" placeholder="Konkretny obraz sukcesu za 12 miesięcy..."></textarea>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">39</span> Czy Twoi bliscy wspierają ten kierunek?</label>
+          <textarea name="q39" placeholder="Kto jest po Twojej stronie, a kto może być sceptyczny?"></textarea>
+        </div>
+      </div>
+
+      <!-- BLOK 8 -->
+      <div class="block">
+        <div class="block-header">
+          <div class="block-number">8</div>
+          <div>
+            <div class="block-title">Wizja</div>
+            <div class="block-subtitle">Gdzie chcesz być za 3 lata</div>
+          </div>
+        </div>
+
+        <div class="question">
+          <label><span class="qnum">40</span> Jak wyobrażasz sobie swój tydzień pracy za 3 lata — gdybyś robiła dokładnie to, co chcesz?</label>
+          <textarea name="q40" placeholder="Opisz ten tydzień: co robisz, z kim, gdzie, za ile..."></textarea>
+        </div>
+      </div>
+
+      <div class="submit-wrap">
+        <button type="submit">Wyślij odpowiedzi</button>
+        <p class="submit-note">Odpowiedzi trafią bezpośrednio do Dominika. Nic nie jest publiczne.</p>
+      </div>
+
+    </form>
+  </div>
+
+  <div id="thank-you">
+    <div class="icon">☕</div>
+    <h2>Dziękuję, Natalia!</h2>
+    <p>Odpowiedzi dotarły. Na ich podstawie powstanie Twój biznes plan<br>i strategia budowania marki eksperckiej.</p>
+    <p style="margin-top:16px; color:#c8a97e;">Możesz zamknąć tę kartę.</p>
+  </div>
+
+</main>
+
+<script>
+  // Progress bar
+  const textareas = document.querySelectorAll('textarea');
+  const bar = document.getElementById('progress');
+
+  function updateProgress() {
+    const filled = [...textareas].filter(t => t.value.trim().length > 5).length;
+    bar.style.width = (filled / textareas.length * 100) + '%';
+  }
+
+  textareas.forEach(t => t.addEventListener('input', updateProgress));
+
+  // Form submit via fetch (Formspree AJAX)
+  const form = document.getElementById('natalia-form');
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const data = new FormData(form);
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        document.getElementById('form-wrap').style.display = 'none';
+        document.getElementById('thank-you').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        alert('Coś poszło nie tak. Spróbuj jeszcze raz lub napisz do Dominika.');
+      }
+    } catch {
+      alert('Brak połączenia. Sprawdź internet i spróbuj jeszcze raz.');
+    }
+  });
+</script>
+
+</body>
+</html>
