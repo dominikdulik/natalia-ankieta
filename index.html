@@ -286,7 +286,7 @@
       <p>Odpowiedzi z tego wywiadu posłużą do stworzenia Twojego biznes planu i strategii contentu na pierwsze 90 dni. Zajmie Ci to ok. 20–30 minut. Możesz wracać i uzupełniać.</p>
     </div>
 
-    <form id="natalia-form" action="https://formspree.io/f/TWOJ_ENDPOINT" method="POST">
+    <form id="natalia-form">
 
       <div class="name-field">
         <label for="imie">Twoje imię i nazwisko</label>
@@ -610,27 +610,74 @@
 
   textareas.forEach(t => t.addEventListener('input', updateProgress));
 
-  // Form submit via fetch (Formspree AJAX)
+  // Form submit — mailto
   const form = document.getElementById('natalia-form');
-  form.addEventListener('submit', async function(e) {
+  form.addEventListener('submit', function(e) {
     e.preventDefault();
+
+    const labels = {
+      imie: 'Imię i nazwisko',
+      q01: '01. Opisz siebie w jednym zdaniu',
+      q02: '02. Ile lat w branży i co robiłaś',
+      q03: '03. Co robisz w Full Circle Roasters',
+      q04: '04. Działalność konsultancka poza pracą',
+      q05: '05. Certyfikaty i szkolenia',
+      q06: '06. Konkursy (zawodnik / coach)',
+      q07: '07. Jak sprawdzasz jakość kawiarni',
+      q08: '08. Jak wspierasz nowe miejsce',
+      q09: '09. Praca z zespołem przed konkursem',
+      q10: '10. 3 największe błędy kawiarni',
+      q11: '11. Czego potrzebują importerzy',
+      q12: '12. Szkolenia formalne i nieformalne',
+      q13: '13. Najlepszy klient / współpracownik',
+      q14: '14. Komu pomagasz najchętniej',
+      q15: '15. Obszar geograficzny działania',
+      q16: '16. Klienci prywatni już teraz',
+      q17: '17. Kto pisze gdy jest problem z kawą',
+      q18: '18. Co rozumiesz, czego inni nie widzą',
+      q19: '19. Co zaskakuje ludzi przy pierwszej pracy',
+      q20: '20. Styl pracy z ludźmi',
+      q21: '21. Technika + biznes — jak łączysz',
+      q22: '22. Kontrowersyjny pogląd na kawę',
+      q23: '23. Za co chcesz być płatna najpierw',
+      q24: '24. Projekt czy retainer',
+      q25: '25. Ile godzin tygodniowo na własny biznes',
+      q26: '26. Full Circle — konflikt czy wsparcie',
+      q27: '27. Stawka godzinowa / dzienna',
+      q28: '28. Produkty cyfrowe',
+      q29: '29. Co Cię nakręca w kawie',
+      q30: '30. Co Cię irytuje w branży',
+      q31: '31. Język treści — PL / EN / oba',
+      q32: '32. Formaty treści i trudności',
+      q33: '33. Kogo obserwujesz i szanujesz',
+      q34: '34. Kamera czy pisanie',
+      q35: '35. Co Cię powstrzymuje',
+      q36: '36. Czego się boisz w personal brandzie',
+      q37: '37. Reakcja na krytykę',
+      q38: '38. Co oznaczałoby sukces za rok',
+      q39: '39. Wsparcie bliskich',
+      q40: '40. Tydzień pracy za 3 lata'
+    };
+
     const data = new FormData(form);
-    try {
-      const res = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
-      if (res.ok) {
-        document.getElementById('form-wrap').style.display = 'none';
-        document.getElementById('thank-you').style.display = 'block';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        alert('Coś poszło nie tak. Spróbuj jeszcze raz lub napisz do Dominika.');
-      }
-    } catch {
-      alert('Brak połączenia. Sprawdź internet i spróbuj jeszcze raz.');
+    let body = 'ODPOWIEDZI NATALI GRABOWSKIEJ\n';
+    body += '==============================\n\n';
+
+    for (const [key, label] of Object.entries(labels)) {
+      const val = data.get(key) || '(brak odpowiedzi)';
+      body += label + '\n';
+      body += val.trim() + '\n\n---\n\n';
     }
+
+    const subject = encodeURIComponent('Ankieta Natalia Grabowska — odpowiedzi');
+    const bodyEncoded = encodeURIComponent(body);
+    window.location.href = `mailto:dominikdulik@gmail.com?subject=${subject}&body=${bodyEncoded}`;
+
+    setTimeout(function() {
+      document.getElementById('form-wrap').style.display = 'none';
+      document.getElementById('thank-you').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 800);
   });
 </script>
 
